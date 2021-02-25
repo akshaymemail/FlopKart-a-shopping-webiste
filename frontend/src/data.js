@@ -8,7 +8,7 @@ const data = {
             price : 345,
             brand : 'Nike',
             rating : 4.5,
-            numReview : 10,
+            numReview : 34,
             description : 'Best in class'
         },
         {
@@ -19,7 +19,7 @@ const data = {
             price : 543,
             brand : 'Nike',
             rating : 5,
-            numReview : 10,
+            numReview : 49,
             description : 'Best in class'
         },
         {
@@ -30,7 +30,7 @@ const data = {
             price : 643,
             brand : 'Nike',
             rating : 4.5,
-            numReview : 10,
+            numReview : 53,
             description : 'Best in class'
         },
         {
@@ -40,8 +40,8 @@ const data = {
             image : '/images/p4.jpg',
             price : 982,
             brand : 'Nike',
-            rating : 3.5,
-            numReview : 10,
+            rating : 4.5,
+            numReview : 56,
             description : 'Best in class'
         },
         {
@@ -52,7 +52,7 @@ const data = {
             price : 329,
             brand : 'Nike',
             rating : 4,
-            numReview : 10,
+            numReview : 9,
             description : 'Best in class'
         },
         {

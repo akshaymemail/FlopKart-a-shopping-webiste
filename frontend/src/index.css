@@ -126,6 +126,10 @@ img.medium {
   color: #1fab89
 }
 
+.raiting span:last-child{
+  color: #384259;
+}
+
 .price *{
   color: #384259;
 }
