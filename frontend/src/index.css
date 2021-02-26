@@ -56,6 +56,16 @@ a:hover {
   color: #A683E3;
 }
 
+ul{
+  padding : 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+li{
+  margin-top: 1rem;
+}
+
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;
@@ -64,6 +74,25 @@ h1 {
 h2 {
   font-size: 1.6rem;
   padding: 1rem 0;
+}
+
+button{
+  padding: 1rem;
+  border-radius: .5rem;
+  background-color: #c9d6df;
+  border: none;
+  outline: none;
+  width:100%;
+  margin: 5rem auto 1rem auto;
+  
+  cursor: pointer;
+  transition: .5s ease-in-out;
+  font-weight:bold;
+  color: #424242
+}
+
+button:hover {
+  background-color: #cbdce7
 }
 
 /* ---------------------------------------------------------------- */
@@ -95,6 +124,18 @@ footer {
   justify-content: center;
 }
 
+.row.top{
+  align-items: flex-start
+}
+
+.col-1{
+  flex: 1 1 25rem;
+}
+
+.col-2{
+  flex: 2 1 50rem;
+}
+
 /* imgage */
 
 img {
@@ -106,9 +147,13 @@ img.medium {
   width: 100%;
 }
 
+img.large {
+  width: 100%;
+}
+
 .card {
   margin: 1rem;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 5%);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 6%);
     border-radius: 10px;
     background-color: #f0f5f9;
 }
@@ -120,7 +165,6 @@ img.medium {
 .card-body>* {
   margin-bottom: .5rem;
 }
-
 
 .raiting span {
   color: #1fab89
@@ -134,6 +178,13 @@ img.medium {
   color: #384259;
 }
 
+.success{
+  color: #1fab89;
+}
+
+.error{
+  color: #ff165d;
+}
 
 
 

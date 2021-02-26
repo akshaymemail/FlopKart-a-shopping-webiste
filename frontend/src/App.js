@@ -1,22 +1,23 @@
 import React from 'react'
-import data from './data';
-import ProductCard from './components/ProductCard'
+import {BrowserRouter, Route} from 'react-router-dom'
+
 import Header from './components/partials/Header'
 import Footer from './components/partials/Footer'
+import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './screens/ProductScreen'
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="grid-container">
       <Header />
         <main>
-            <div className="row center">
-               {data.products.map((product) => 
-                   <ProductCard product = {product} key={product.id}/>
-                 )}  
-            </div>
+        <Route path="/product/:id" component = {ProductScreen} ></Route>
+        <Route path="/" component = {HomeScreen} exact ></Route>  
         </main>
       <Footer />
     </div>
+    </BrowserRouter>
   );
 }
 
