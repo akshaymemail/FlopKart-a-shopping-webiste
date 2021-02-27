@@ -186,8 +186,22 @@ img.large {
   color: #ff165d;
 }
 
+.alert-error{
+  color: #ff165d;
+  padding:1rem;
+}
 
+.loading, .alert-error {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30vh;
+}
 
+.loading i{
+  font-size: 5rem;
+}
 
 ::-webkit-scrollbar {
   width: 3px;
