@@ -19,18 +19,16 @@ function CartScreen(props) {
     const {cartItems} = cart
 
     return (
-        <div className="row top">
+            cartItems.length === 0 
+            ? <EmptyCart />
+            : <div className="row top">
             <div className="col-2">
-                {
-                    cartItems.length === 0 
-                    ? <EmptyCart />
-                    : <CartRow cartItems={cartItems} />
-                }
+                <CartRow cartItems={cartItems} />
             </div>
             {cartItems.length > 0 && (
                 <Checkout cartItems={cartItems} history ={props.history} />
             )}
-        </div>
+        </div> 
     )
 }
 
