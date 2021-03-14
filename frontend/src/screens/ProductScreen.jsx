@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
 import LoadingBox from '../components/LoadingBox'
@@ -10,10 +10,15 @@ function ProductScreen (props) {
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const {loading, product, error} = productDetails
+    const [quantity, setQuantity ] = useState(1)
 
     useEffect(() => {
         dispatch(detailsProduct(props.match.params.id))
     }, [dispatch, props.match.params.id])
+
+    const addToCardHandler = () => {
+        props.history.push(`/cart/${props.match.params.id}?quantity=${quantity}`)
+    }
 
     return (
 
@@ -61,13 +66,28 @@ function ProductScreen (props) {
                                         </div>
                                     </div>
                                 </li>
-        
                                 <li>
-                                    <button className="primary block">
-                                        Add to cart
-                                    </button>
+                                { product.countInStock > 0 && (
+                                    <>
+                                        <li>
+                                            <div className="row">
+                                                <div>Quantity</div>
+                                                <div>
+                                                    <select name='quantity' id="quantity" value = { quantity } onChange = { e => setQuantity(e.target.value)}>
+                                                        {
+                                                            [ ...Array( product.countInStock ).keys() ].map( x => <option key = { x + 1 } value = { x + 1 } > { x + 1 } </option> )
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <button onClick = { addToCardHandler } className="primary block"> Add to Cart </button>
+                                        </li>
+                                   </>
+                                  )
+                                }
                                 </li>
-        
                             </ul>
                         </div>
                     </div>

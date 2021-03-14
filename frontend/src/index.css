@@ -75,7 +75,7 @@ h2 {
   font-size: 1.6rem;
   padding: 1rem 0;
 }
-
+.shop-now,
 button{
   padding: 1rem;
   border-radius: .5rem;
@@ -83,8 +83,6 @@ button{
   border: none;
   outline: none;
   width:100%;
-  margin: 5rem auto 1rem auto;
-  
   cursor: pointer;
   transition: .5s ease-in-out;
   font-weight:bold;
@@ -93,6 +91,10 @@ button{
 
 button:hover {
   background-color: #cbdce7
+}
+
+abbr {
+  text-decoration: none;
 }
 
 /* ---------------------------------------------------------------- */
@@ -107,6 +109,14 @@ a.brand {
   font-size: 3rem;
 }
 
+.badge{
+  background-color: #ff165d;
+  color: #f1f1f1;
+  border-radius: 50%;
+  padding : 0.2rem 0.7rem;
+  margin-left: 0.2rem;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -118,6 +128,17 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center
+}
+
+.center{
+  text-align: center;
+}
+
+.vertical-center{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center
 }
 
 .row.center {
@@ -136,6 +157,10 @@ footer {
   flex: 2 1 50rem;
 }
 
+.min-30{
+  max-width: 30rem;
+}
+
 /* imgage */
 
 img {
@@ -144,6 +169,11 @@ img {
 
 img.medium {
   max-width: 29rem;
+  width: 100%;
+}
+
+img.small{
+  max-width: 5rem;
   width: 100%;
 }
 
@@ -162,7 +192,7 @@ img.large {
   padding: 1rem
 }
 
-.card-body>* {
+.card-body > * {
   margin-bottom: .5rem;
 }
 
@@ -202,6 +232,7 @@ img.large {
 .loading i{
   font-size: 5rem;
 }
+
 
 ::-webkit-scrollbar {
   width: 3px;
