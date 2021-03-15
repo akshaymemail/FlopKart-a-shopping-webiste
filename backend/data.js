@@ -1,7 +1,21 @@
+import bcrypt from 'bcrypt'
 const data = {
+    users:[
+        {
+            name : 'AKSHAY KUMAR SINGH',
+            email : 'akshaymemail@gmail.com',
+            password : bcrypt.hashSync('akshay', 8),
+            isAdmin : true
+        },
+        {
+            name : 'HUNGRY PUSSY',
+            email : 'hungrypussy@gmail.com',
+            password : bcrypt.hashSync('pussy', 8),
+            isAdmin : false
+        }
+    ],
     products: [
         {
-            id : '1',
             name : 'Nike Slim Shirt',
             category : 'Shirts',
             image : '/images/p1.jpg',
@@ -13,7 +27,6 @@ const data = {
             description : 'Best in class'
         },
         {
-            id : '2',
             name : 'Two Slim Shirt',
             category : 'Shirts',
             image : '/images/p2.jpg',
@@ -25,7 +38,6 @@ const data = {
             description : 'Best in class'
         },
         {
-            id : '3',
             name : 'Three Slim Shirt',
             category : 'Shirts',
             image : '/images/p3.jpg',
@@ -37,7 +49,6 @@ const data = {
             description : 'Best in class'
         },
         {
-            id : '4',
             name : 'Nike Slim Pant',
             category : 'Pants',
             image : '/images/p4.jpg',
@@ -49,7 +60,6 @@ const data = {
             description : 'Best in class'
         },
         {
-            id : '5',
             name : 'Two Slim Pants',
             category : 'Pants',
             image : '/images/p5.jpg',
@@ -61,7 +71,6 @@ const data = {
             description : 'Best in class'
         },
         {
-            id : '6',
             name : 'Three Slim Pants',
             category : 'Pants',
             image : '/images/p6.jpg',

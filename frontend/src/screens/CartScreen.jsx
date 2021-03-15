@@ -20,9 +20,7 @@ function CartScreen(props) {
     const {cartItems} = cart
 
     return (
-            cart.loading 
-            ? <LoadingBox></LoadingBox> 
-            :cartItems.length === 0 
+            cartItems.length === 0 
             ? <EmptyCart />
             : <div className="row top">
             <div className="col-2">

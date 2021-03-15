@@ -6,11 +6,11 @@ function ProductCard (props) {
     const {product} = props
     return (
         <div className="card">
-            <Link to = {`product/${product.id}`}>
+            <Link to = {`product/${product._id}`}>
                 <img className="medium" src={product.image} alt={product.name}></img>
             </Link>
             <div className="card-body">
-                <Link to={`product/${product.id}`}>
+                <Link to={`product/${product._id}`}>
                     <h2>{product.name}</h2>
                 </Link>
                 <Rating rating = {product.rating} review = {product.numReview} />

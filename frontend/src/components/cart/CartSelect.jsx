@@ -11,7 +11,7 @@ function CartSelect(props) {
                 id="quantity" 
                 value={props.quantity} 
                 onChange={e => 
-                dispatch(addToCart( Number(props.product), Number(e.target.value) ))}>
+                dispatch(addToCart( props.product, Number(e.target.value) ))}>
             
                 {
                     [...Array(props.countInStock).keys()].map( x => <option key={x + 1} value = {x + 1}> {x + 1} </option>)

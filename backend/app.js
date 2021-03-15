@@ -1,28 +1,31 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import express from 'express';
 import data from './data.js'
+import mongoose from 'mongoose'
+import userRouter from './routers/userRouter.js';
+import productRouter from './routers/productRouter.js';
 
 const app = express();
 
 // constants
 const PORT = 5000 || process.env.PORT
 
+// connecting to the mongodb
+mongoose.connect(process.env.DB_STRING,{
+    useNewUrlParser : true,
+    useUnifiedTopology : true,
+})
+
+// Routers
+app.use('/api/users', userRouter)
+app.use('/api/products', productRouter)
+
+
 app.get('/', (req, res) =>{
     res.send("Node is here")
 })
 
-app.get('/api/products', (req, res) =>{
-    res.send(data.products)
-})
-
-app.get('/api/products/:id', (req, res) => {
-    const product = data.products.find(x => x.id === req.params.id)
-    // check if proudct is exist or not 
-    if(product){
-        res.send(product)
-    }else{
-        res.status(404).send({message : `Product Not Found`})
-    }
-})
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)
