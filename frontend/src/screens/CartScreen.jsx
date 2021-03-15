@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartRow from '../components/cart/CartRow'
 import Checkout from '../components/cart/Checkout'
 import EmptyCart from '../components/cart/EmptyCart'
+import LoadingBox from '../components/LoadingBox'
 import { addToCart } from '../redux/cart/cartActions'
 
 function CartScreen(props) {
@@ -19,7 +20,9 @@ function CartScreen(props) {
     const {cartItems} = cart
 
     return (
-            cartItems.length === 0 
+            cart.loading 
+            ? <LoadingBox></LoadingBox> 
+            :cartItems.length === 0 
             ? <EmptyCart />
             : <div className="row top">
             <div className="col-2">
