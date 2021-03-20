@@ -10,7 +10,7 @@ function CartRow(props) {
         <ul>
             {
                 props.cartItems.map(item => (
-                    <li>
+                    <li key={item.id}>
                         <div className="row">
                             <CartImage url={item.image} alt={item.name} />
                             <div className='min-30'>

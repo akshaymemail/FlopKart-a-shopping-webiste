@@ -1,9 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Logout from '../user/Logout';
 function Header (){
     const cart = useSelector(state => state.cart)
-    const {cartItems} = cart
+    const { cartItems } = cart
+
+    const signIn = useSelector(state => state.signIn)
+    const { userInfo } = signIn
     return (
         <header className="row">
             <div>
@@ -17,7 +21,11 @@ function Header (){
                     )
                 }
                 </Link>
-                <Link to="/signin">Signin</Link>
+                {
+                    userInfo 
+                    ? (<Logout firstName={userInfo.firstName} />) 
+                    : (<Link to="/signin">Signin</Link>)
+                }
             </div>
         </header>
     );

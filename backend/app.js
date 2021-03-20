@@ -8,6 +8,10 @@ import productRouter from './routers/productRouter.js';
 
 const app = express();
 
+//middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended : true}))
+
 // constants
 const PORT = 5000 || process.env.PORT
 
@@ -20,7 +24,6 @@ mongoose.connect(process.env.DB_STRING,{
 // Routers
 app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
-
 
 app.get('/', (req, res) =>{
     res.send("Node is here")
