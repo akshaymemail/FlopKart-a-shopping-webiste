@@ -8,6 +8,7 @@ import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen';
 import SignInScreen from './screens/SignInScreen';
 import RegisterScreen from './screens/RegisterScreen'
+import shippingAddressScreen from './screens/ShippingAddressScreen'
 
 function App() {
   return (
@@ -15,11 +16,12 @@ function App() {
     <div className="grid-container">
       <Header />
         <main>
+          <Route path="/" component = {HomeScreen} exact ></Route>
           <Route path="/cart/:id?" component = {CartScreen}></Route>
           <Route path="/product/:id" component = {ProductScreen} ></Route>
           <Route path="/signin" component = {SignInScreen}></Route>
-          <Route path="/register" component = {RegisterScreen}></Route>
-          <Route path="/" component = {HomeScreen} exact ></Route>  
+          <Route path="/register" component = {RegisterScreen}></Route> 
+          <Route path="/shipping" component={shippingAddressScreen}></Route> 
         </main>
       <Footer />
     </div>

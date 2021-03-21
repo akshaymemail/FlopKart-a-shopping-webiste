@@ -310,6 +310,20 @@ i.button-loading{
   display: block !important;
 }
 
+ /* CHECKOUT STEPS */
+ .checkout > div{
+   border-top: 3px solid gainsboro;
+   color: gray;
+   flex: 1;
+   padding: 1rem;
+   font-weight: bold;
+ }
+
+ .checkout > div.active{
+   border-top-color: #1fab89;
+   color: #1fab89;
+ }
+
 .inactive {
   display: none;
 }
