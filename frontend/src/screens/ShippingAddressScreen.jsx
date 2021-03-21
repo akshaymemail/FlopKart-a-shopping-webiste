@@ -60,7 +60,7 @@ function ShippingAddressScreen(props) {
                     <label htmlFor="state">State</label>
                     <input type="text" name='state' id='state' value={state} onChange={e => setState(e.target.value)} required/>
                 </div>
-                <button type="submit">Continue</button>
+                <button type="submit">Payment</button>
             </form>
         </div>
     )
