@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import { userSignIn } from '../redux/signin/signinActions'
-import LoadingBox from '../components/LoadingBox'
+import { userSignIn } from '../redux/user/userActions'
 import MessageBox from '../components/MessageBox'
 
 function SignInScreen(props) {
@@ -30,7 +29,7 @@ function SignInScreen(props) {
             <form className='form' onSubmit={handleSubmit} >
                 <div>
                     <h1>Sign In</h1>
-                    {error && <MessageBox variant={'error'}>Either username or password is incorrect</MessageBox>}
+                    {error && <MessageBox variant={'error'}>Either username or password in incorrect</MessageBox>}
                 </div>
                 
                 <div>
@@ -45,7 +44,7 @@ function SignInScreen(props) {
                     <button type="submit">{loading ? <i className="fa fa-spinner fa-spin button-loading"></i> :  <i>Sign In</i> } </button>
                 </div>
                 <div>
-                    <p>New customer? {' '} <Link  to='register' >Create an account!</Link></p>
+                    <p>New customer? {' '} <Link  to={`register?redirect=${redirect}`} >Create an account!</Link></p>
                 </div>
             </form>
         </div>

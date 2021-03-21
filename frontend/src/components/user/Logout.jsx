@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
-import { logOut } from '../../redux/signin/signinActions'
+import { logOut } from '../../redux/user/userActions'
 
 function Logout(props) {
 
