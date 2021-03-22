@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Checkout from '../components/Checkout'
+import CheckoutStep from '../components/CheckoutStep'
 import { saveShippingAddress } from '../redux/cart/cartActions'
 
 function ShippingAddressScreen(props) {
@@ -29,7 +29,7 @@ function ShippingAddressScreen(props) {
     }
     return (
         <div>
-            <Checkout step1 step2 ></Checkout>
+            <CheckoutStep step1 step2 ></CheckoutStep>
             <form className='form' onSubmit={handleSubmit} >
                 <h1>Shipping Address</h1>
                 <div>

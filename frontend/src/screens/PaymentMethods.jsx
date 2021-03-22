@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Checkout from '../components/Checkout'
+import CheckoutStep from '../components/CheckoutStep'
 import { savePaymentMethod } from '../redux/cart/cartActions'
 
 function PaymentMethods(props) {
@@ -21,7 +21,7 @@ function PaymentMethods(props) {
     }
     return (
         <div>
-            <Checkout step1 step2 step3 />
+            <CheckoutStep step1 step2 step3></CheckoutStep>
             <form className='form' onSubmit={handleSubmit} >
                 <div>
                     <h1>Select Payment Method</h1>

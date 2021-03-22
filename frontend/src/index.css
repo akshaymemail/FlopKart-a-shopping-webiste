@@ -113,6 +113,11 @@ input:focus {
   border-bottom: 3.1px dashed #1fab89;
 }
 
+:disabled{
+  cursor: not-allowed;
+  background-color: #384259;
+}
+
 /* ---------------------------------------------------------------- */
 
 header a {

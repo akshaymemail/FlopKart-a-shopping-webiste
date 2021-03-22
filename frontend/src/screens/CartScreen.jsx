@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartRow from '../components/cart/CartRow'
 import Checkout from '../components/cart/Checkout'
 import EmptyCart from '../components/cart/EmptyCart'
-import LoadingBox from '../components/LoadingBox'
 import { addToCart } from '../redux/cart/cartActions'
 
 function CartScreen(props) {
@@ -15,7 +14,6 @@ function CartScreen(props) {
             dispatch(addToCart(productId, quantity))
         }
     }, [dispatch, productId, quantity])
-
     const cart = useSelector(state => state.cart)
     const {cartItems} = cart
 

@@ -63,7 +63,7 @@ function SignInScreen(props) {
                     <button type="submit">{loading ? <i className="fa fa-spinner fa-spin button-loading"></i> :  <i>Create account</i> } </button>
                 </div>
                 <div>
-                    <p>Already have an account? {' '} <Link  to={`login?redirect=${redirect}`} >Sign in!</Link></p>
+                    <p>Already have an account? {' '} <Link  to={`signin?redirect=${redirect}`} >Sign in!</Link></p>
                 </div>
             </form>
         </div>

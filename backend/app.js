@@ -19,6 +19,7 @@ const PORT = 5000 || process.env.PORT
 mongoose.connect(process.env.DB_STRING,{
     useNewUrlParser : true,
     useUnifiedTopology : true,
+    useCreateIndex : true
 })
 
 // Routers
