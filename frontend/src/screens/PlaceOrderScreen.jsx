@@ -1,8 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartImage from '../components/cart/CartImage'
 import CheckoutStep from '../components/CheckoutStep'
+import { createOrder } from '../redux/order/orderActions'
+import { CREATE_ORDER_RESET } from '../redux/order/orderTypes'
 
 function PlaceOrderScreen(props) {
     const cart = useSelector(state => state.cart)
@@ -10,6 +12,9 @@ function PlaceOrderScreen(props) {
     if(!cart.paymentMethod || !signIn.userInfo){
         props.history.push('/payment')
     }
+    // ORDER
+    const orderState = useSelector(state => state.order)
+    const {loading, success, error, order} = orderState
     const {shippingAddress, paymentMethod, cartItems} = cart
     cart.items = cartItems.reduce((a, c) => a + c.quantity, 0)
     cart.itemPrice = cartItems.reduce((a, c) => a + c.quantity * c.price , 0)
@@ -17,12 +22,20 @@ function PlaceOrderScreen(props) {
     cart.shippingPrice = cart.itemPrice > 199 ? 0 : 40
     // total Price
     cart.totalPrice = (cart.itemPrice + cart.shippingPrice)
-
+    // dispatch ref...
+    const dispatch = useDispatch()
     // HANDLE PLACE ORDER
     function handlePlaceOrder(e){
         e.preventDefault()
-        // TODO ...
+        dispatch(createOrder({...cart, orderItems : cartItems}))
     }
+
+    useEffect(() => {
+        if(success){
+            props.history.push(`/order/${order._id}`)
+            dispatch({type : CREATE_ORDER_RESET})
+        }
+    }, [dispatch, order, props.history, success])
 
     return (
         <div>
@@ -103,7 +116,7 @@ function PlaceOrderScreen(props) {
                             </li>
                             <li>
                                 <button type="submit" onClick={handlePlaceOrder} disabled ={cartItems.length === 0}>
-                                    Place Order
+                                    {loading ? <i className="fa fa-spinner fa-spin button-loading"></i> : <i>Place Order</i> } 
                                 </button>
                             </li>
                         </ul>

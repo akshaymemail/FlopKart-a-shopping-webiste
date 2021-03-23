@@ -1,10 +1,10 @@
 import dotenv from 'dotenv'
 dotenv.config()
 import express from 'express';
-import data from './data.js'
 import mongoose from 'mongoose'
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
+import orderRouter from './routers/orderRoute.js';
 
 const app = express();
 
@@ -25,6 +25,7 @@ mongoose.connect(process.env.DB_STRING,{
 // Routers
 app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
 
 app.get('/', (req, res) =>{
     res.send("Node is here")

@@ -8,7 +8,7 @@ function ShippingAddressScreen(props) {
     const {userInfo} = signIn
     // redirect to signin if user is logged out
     if(!userInfo){
-        props.history.push('/signin')
+        props.history.push('/signin?rediret=shipping')
     }
     // get address information from redux to filled data that is alread saved in localstorage
     const cart = useSelector(state => state.cart)

@@ -26,7 +26,7 @@ function ProductScreen (props) {
             (loading 
                 ? (<LoadingBox></LoadingBox>)
                 : error 
-                ? (<MessageBox variant={'error'}>{error}</MessageBox>) 
+                ? (<MessageBox variant={'error'}>{error.message}</MessageBox>) 
                 : <div>
                 <Link to='/'>Go Back</Link>
                 <div className="row top">
