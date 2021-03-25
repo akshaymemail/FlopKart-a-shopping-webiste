@@ -31,4 +31,17 @@ orderRouter.post('/', isAuth, (req, res) => {
     }
 })
 
+// get data by _id
+orderRouter.get('/:id', isAuth, (req, res) => {
+    Order.findById(req.params.id, (err, foundOrder) => {
+        if(!err){
+            // Order found succesfully
+            res.send(foundOrder)
+        }else {
+            // order not found
+            res.status(404).send({Error : "Item Not Found"})
+        }
+    })
+})
+
 export default orderRouter

@@ -34,7 +34,7 @@ export const userRegister = (firstName, lastName, email, password) => async (dis
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
-            payload: error.responce && error.responce.data.message ? error.responce.data.message : error.message
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }

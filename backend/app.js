@@ -4,7 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose'
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
-import orderRouter from './routers/orderRoute.js';
+import orderRouter from './routers/orderRouter.js';
 
 const app = express();
 

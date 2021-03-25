@@ -240,6 +240,7 @@ img.large {
   padding: 1rem;
   color: #f1f1f1;
   border-radius: 5px;
+  margin: 1em auto;
 }
 
 .loading {

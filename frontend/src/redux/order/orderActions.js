@@ -3,7 +3,7 @@ import { EMPTY_CART } from '../cart/cartTypes'
 import {
     CREATE_ORDER_FAIL,
     CREATE_ORDER_REQUEST,
-    CREATE_ORDER_SUCCESS
+    CREATE_ORDER_SUCCESS,
 } from "./orderTypes"
 
 export const createOrder = order => async (dispatch, getState) => {
@@ -13,7 +13,6 @@ export const createOrder = order => async (dispatch, getState) => {
     })
     try {
         const {signIn : {userInfo}} = getState()
-        console.log(userInfo.token)
         const {data} = await Axios.post('/api/orders', order, {
             headers : {
                 authorization : `Baerer ${userInfo.token}`
@@ -25,7 +24,7 @@ export const createOrder = order => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: CREATE_ORDER_FAIL,
-            payload : error.responce && error.responce.data.message ? error.responce.data.message : error.message
+            payload : error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }

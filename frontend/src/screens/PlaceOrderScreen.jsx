@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartImage from '../components/cart/CartImage'
 import CheckoutStep from '../components/CheckoutStep'
+import MessageBox from '../components/MessageBox'
 import { createOrder } from '../redux/order/orderActions'
 import { CREATE_ORDER_RESET } from '../redux/order/orderTypes'
+import { orderDetails } from '../redux/orderDetails/orderDetailActions'
 
 function PlaceOrderScreen(props) {
     const cart = useSelector(state => state.cart)
@@ -29,11 +31,11 @@ function PlaceOrderScreen(props) {
         e.preventDefault()
         dispatch(createOrder({...cart, orderItems : cartItems}))
     }
-
     useEffect(() => {
         if(success){
-            props.history.push(`/order/${order._id}`)
             dispatch({type : CREATE_ORDER_RESET})
+            props.history.push(`/orders/${order._id}`)
+            dispatch(orderDetails(order._id))
         }
     }, [dispatch, order, props.history, success])
 
@@ -118,7 +120,9 @@ function PlaceOrderScreen(props) {
                                 <button type="submit" onClick={handlePlaceOrder} disabled ={cartItems.length === 0}>
                                     {loading ? <i className="fa fa-spinner fa-spin button-loading"></i> : <i>Place Order</i> } 
                                 </button>
+                               
                             </li>
+                            {error && <MessageBox variant={'error'}>{error}</MessageBox>}
                         </ul>
                     </div>
                 </div>
