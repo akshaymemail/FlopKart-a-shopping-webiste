@@ -226,22 +226,24 @@ img.large {
 .price * {
   color: #384259;
 }
-
-.success {
-  color: #1fab89;
-}
-
-.error {
-  color: #ff165d;
-}
-
-.alert-error {
-  background: #ff165d;
+ /* ALERT */
+div.alert{
   padding: 1rem;
   color: #f1f1f1;
   border-radius: 5px;
   margin: 1em auto;
 }
+
+.alert-success {
+  background-color: #1fab89;
+}
+.alert-warning {
+  background-color: #f875aa
+}
+.alert-error {
+  background-color: #ff165d;
+}
+
 
 .loading {
   display: flex;

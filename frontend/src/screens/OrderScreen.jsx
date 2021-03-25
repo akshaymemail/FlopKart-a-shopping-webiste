@@ -30,6 +30,10 @@ function OrderScreen() {
                                 {orderData.shippingAddress.pinCode} <br/>
                                 <strong>Mobile : </strong> {orderData.shippingAddress.mobileNumber}
                             </p>
+                            {orderData.isDelivered 
+                                ? <MessageBox variant={'success'}>Order Delivered</MessageBox>
+                                : <MessageBox variant={'warning'}>Not Delivered</MessageBox>
+                            }
                         </div>
                     </li>
                     
@@ -39,6 +43,10 @@ function OrderScreen() {
                             <p>
                                 <strong>Payment :</strong> {orderData.paymentMethod} <br/>
                             </p>
+                            {orderData.isPaid 
+                                ? <MessageBox variant={'success'}>Paid</MessageBox>
+                                : <MessageBox variant={'warning'}>Not Paid</MessageBox>
+                            }
                         </div>
                     </li>
 
