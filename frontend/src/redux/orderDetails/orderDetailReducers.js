@@ -2,6 +2,7 @@ import { ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS } from
 
 const initialState = {
     loading : false,
+    success : false,
     orderData : {},
     error : ''
 }
@@ -13,7 +14,8 @@ export const  orderDetailsReducer = (state = initialState, action) => {
         }
         case ORDER_DETAILS_SUCCESS: return {
             loading : false,
-            orderData : action.payload
+            orderData : action.payload,
+            success : true
         }
         case ORDER_DETAILS_FAIL : return {
             loading : false,

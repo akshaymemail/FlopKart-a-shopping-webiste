@@ -6,7 +6,6 @@ import CheckoutStep from '../components/CheckoutStep'
 import MessageBox from '../components/MessageBox'
 import { createOrder } from '../redux/order/orderActions'
 import { CREATE_ORDER_RESET } from '../redux/order/orderTypes'
-import { orderDetails } from '../redux/orderDetails/orderDetailActions'
 
 function PlaceOrderScreen(props) {
     const cart = useSelector(state => state.cart)
@@ -35,7 +34,6 @@ function PlaceOrderScreen(props) {
         if(success){
             dispatch({type : CREATE_ORDER_RESET})
             props.history.push(`/orders/${order._id}`)
-            dispatch(orderDetails(order._id))
         }
     }, [dispatch, order, props.history, success])
 

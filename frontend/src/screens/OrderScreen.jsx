@@ -1,17 +1,26 @@
-import {useSelector} from 'react-redux'
+import { useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartImage from '../components/cart/CartImage'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
+import { orderDetails } from '../redux/orderDetails/orderDetailActions'
 
-function OrderScreen() {
+function OrderScreen(props) {
+    const orderId = props.match.params.id
     const orderState = useSelector(state => state.orderDetails)
-    const {loading, orderData, error} = orderState
+    const {loading,success, orderData, error} = orderState
     
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(orderDetails(orderId))
+    }, [dispatch, orderId])
+
     return loading 
     ? <LoadingBox></LoadingBox>
     : error ? <MessageBox variant={'error'}>{error}</MessageBox> 
-    : (
+    : success && (
         <div>
         <h2>Order : {orderData._id}</h2>
         <div className="row top">
