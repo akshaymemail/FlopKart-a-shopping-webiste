@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import userRouter from './routers/userRouter.js';
 import productRouter from './routers/productRouter.js';
 import orderRouter from './routers/orderRouter.js';
+import { isAuth } from './utils/config.js';
 
 const app = express();
 
@@ -28,9 +29,12 @@ app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 
 app.get('/', (req, res) =>{
-    res.send("Node is here")
+    res.send("Node is here!")
 })
 
+app.get('/api/payment/method/paypal',isAuth, (req, res) => {
+    res.send(process.env.PAYPAL_CLIENT_ID)
+})
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)

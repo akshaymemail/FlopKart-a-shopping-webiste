@@ -1,21 +1,46 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
 import CartImage from '../components/cart/CartImage'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 import { orderDetails } from '../redux/orderDetails/orderDetailActions'
+import {PayPalButton} from 'react-paypal-button-v2'
+import Axios from 'axios'
 
 function OrderScreen(props) {
     const orderId = props.match.params.id
+    const currency = 'INR';
     const orderState = useSelector(state => state.orderDetails)
     const {loading,success, orderData, error} = orderState
+
+    // sdkReady
+    const [sdkReady, setSdkReady] = useState(false)
+    const [clientId, setClientId] = useState('sb')
+
+    // get user info for token
+    const {userInfo} = useSelector(state => state.signIn)
     
     const dispatch = useDispatch()
 
     useEffect(() => {
+        Axios.get('/api/payment/method/paypal', {
+            headers : {
+                authorization : `Baerer ${userInfo.token}`
+            }
+        }).then(response => {
+            setSdkReady(true)
+            setClientId(response.data)
+        }).catch(error => {
+            console.log(error)
+        })
         dispatch(orderDetails(orderId))
-    }, [dispatch, orderId])
+        
+    }, [dispatch, orderId, userInfo.token])
+
+    function successPaymentHandler() {
+        alert('payment Recived')
+    }
 
     return loading 
     ? <LoadingBox></LoadingBox>
@@ -105,6 +130,25 @@ function OrderScreen(props) {
                                 <div><strong>Rs {orderData.totalPrice.toFixed(2)}</strong></div>
                             </div>
                         </li>
+
+                        {
+                            !orderData.isPaid 
+                            &&sdkReady 
+                            &&(
+                                <li>
+                                    <PayPalButton 
+                                        amount={orderData.totalPrice} 
+                                        currency={currency}
+                                        options = {{
+                                            currency : currency.toUpperCase(),
+                                            clientId : clientId
+                                        }}
+                                        onSuccess={successPaymentHandler}
+                                    />
+                                </li>
+                            )
+                        }
+
                     </ul>
                 </div>
             </div>
