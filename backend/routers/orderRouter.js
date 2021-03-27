@@ -44,4 +44,41 @@ orderRouter.get('/:id', isAuth, (req, res) => {
     })
 })
 
+// payment success route
+orderRouter.put('/:id/pay', isAuth, (req, res) => {
+    Order.findById(req.params.id, (err, foundOrder) => {
+        if(!err) {
+            if(foundOrder){
+                // order found
+                foundOrder.isPaid = true
+                foundOrder.paidAt = Date.now()
+                
+                // save some payment result from paypal response
+                foundOrder.paymentResult = {
+                    id : req.body.id,
+                    status : req.body.status,
+                    update_time : req.body.update_time,
+                    email_address : req.body.email_address
+                }
+                // now save the order to update order model
+                Order.save((err, updatedOrder) => {
+                    if(!err){
+                        // succesfully save
+                        res.send({message : "Order Paid", order : updatedOrder})
+                    } else {
+                        // there was an error
+                        res.status(404).send({message : err.message})
+                    }
+                })
+
+            }else {
+                // order not found
+                res.status(404).send({message : "Order not found"})
+            }
+        }else {
+            res.status(502).send({message : err.message})
+        }
+    })
+})
+
 export default orderRouter

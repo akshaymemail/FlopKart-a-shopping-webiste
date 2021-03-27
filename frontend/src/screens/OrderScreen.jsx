@@ -4,29 +4,39 @@ import { Link } from 'react-router-dom'
 import CartImage from '../components/cart/CartImage'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
-import { orderDetails } from '../redux/orderDetails/orderDetailActions'
 import {PayPalButton} from 'react-paypal-button-v2'
 import Axios from 'axios'
+import { orderDetails, payOrder} from '../redux/order/orderActions'
 
 function OrderScreen(props) {
+
+    // get user info for token
+    const {userInfo} = useSelector(state => state.signIn)
+    if(!userInfo){
+        props.history.push(`/signin?redirect=${props.location.pathname}`)
+    }
+
     const orderId = props.match.params.id
     const currency = 'INR';
+
+    // order details 
     const orderState = useSelector(state => state.orderDetails)
     const {loading,success, orderData, error} = orderState
+
+    // order pay
+    const orderPay = useSelector(state => state.orderPay)
+    const {loading : loadingPay, error : errorPay, success: successPay} = orderPay
 
     // sdkReady
     const [sdkReady, setSdkReady] = useState(false)
     const [clientId, setClientId] = useState('sb')
-
-    // get user info for token
-    const {userInfo} = useSelector(state => state.signIn)
     
     const dispatch = useDispatch()
 
     useEffect(() => {
         Axios.get('/api/payment/method/paypal', {
             headers : {
-                authorization : `Baerer ${userInfo.token}`
+                authorization : userInfo ? `Baerer ${userInfo.token}`: ' '
             }
         }).then(response => {
             setSdkReady(true)
@@ -34,12 +44,16 @@ function OrderScreen(props) {
         }).catch(error => {
             console.log(error)
         })
-        dispatch(orderDetails(orderId))
-        
-    }, [dispatch, orderId, userInfo.token])
 
-    function successPaymentHandler() {
-        alert('payment Recived')
+        if(!orderData || successPay || (orderData && orderData._id !== orderId)){
+            dispatch(orderDetails(orderId))
+        }
+        
+    }, [dispatch, orderData, orderId, successPay, userInfo])
+
+    function successPaymentHandler(paymentResult) {
+        // TODO ...
+        dispatch(payOrder(orderData, paymentResult))
     }
 
     return loading 
@@ -133,9 +147,12 @@ function OrderScreen(props) {
 
                         {
                             !orderData.isPaid 
-                            &&sdkReady 
-                            &&(
+                            && !sdkReady 
+                            ? (<LoadingBox></LoadingBox>)
+                            :(
                                 <li>
+                                    {errorPay && <MessageBox variant={'error'}></MessageBox>}
+                                    {loadingPay && <LoadingBox></LoadingBox>}
                                     <PayPalButton 
                                         amount={orderData.totalPrice} 
                                         currency={currency}
@@ -144,6 +161,13 @@ function OrderScreen(props) {
                                             clientId : clientId
                                         }}
                                         onSuccess={successPaymentHandler}
+                                        onError={e=> {
+                                            console.log(e)
+                                        }}
+                                        catchError = {e => {
+                                            console.log(e)
+                                        }}
+                                        
                                     />
                                 </li>
                             )

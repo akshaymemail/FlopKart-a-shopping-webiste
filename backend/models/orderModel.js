@@ -28,31 +28,88 @@ const orderSchema = mongoose.Schema({
     }],
 
     // ADDRESS
-    shippingAddress : {
-        fullName:{type: String, required: true},
-        mobileNumber:{type: String, required : true},
-        locality : {type: String, required : true},
-        address : {type: String, required : true},
-        city : {type: String, required : true},
-        state : {type: String, required : true},
-        pinCode : {type: String, required : true}
+    shippingAddress: {
+        fullName: {
+            type: String,
+            required: true
+        },
+        mobileNumber: {
+            type: String,
+            required: true
+        },
+        locality: {
+            type: String,
+            required: true
+        },
+        address: {
+            type: String,
+            required: true
+        },
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            required: true
+        },
+        pinCode: {
+            type: String,
+            required: true
+        }
     },
 
     //PAYMENT METHODS
-    paymentMethod : {type: String, required :true},
+    paymentMethod: {
+        type: String,
+        required: true
+    },
+
+    // payment result
+    paymentResult: {
+        id: String,
+        status: String,
+        update_time: String,
+        email_address: String
+    },
 
     // PRICE
-    itemPrice : {type: Number, required : true},
-    shippingPrice : {type: Number, required : true},
-    totalPrice : {type: Number, required : true},
+    itemPrice: {
+        type: Number,
+        required: true
+    },
+    shippingPrice: {
+        type: Number,
+        required: true
+    },
+    totalPrice: {
+        type: Number,
+        required: true
+    },
 
     // USER
-    user : {type: mongoose.Schema.Types.ObjectId, ref: 'User', required : true},
-    isPaid : {type : Boolean, default: false},
-    paidAt : {type: Date},
-    isDelivered : {type: Boolean, default: false},
-    deliveredAt : {type: Date},
-},{timestamps : true})
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    isPaid: {
+        type: Boolean,
+        default: false
+    },
+    paidAt: {
+        type: Date
+    },
+    isDelivered: {
+        type: Boolean,
+        default: false
+    },
+    deliveredAt: {
+        type: Date
+    },
+}, {
+    timestamps: true
+})
 
 // creating model
 const Order = mongoose.model('Order', orderSchema)
