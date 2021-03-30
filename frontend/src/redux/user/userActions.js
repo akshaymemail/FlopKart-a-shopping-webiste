@@ -1,6 +1,9 @@
 import Axios from 'axios'
 import {
     USER_LOGOUT,
+    USER_PROFILE_FAIL,
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
@@ -58,7 +61,7 @@ export const userSignIn = (email, password) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: USER_SIGNIN_FAIL,
-            payload: error.responce && error.responce.data.message ? error.responce.data.message : error.message
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }
 }
@@ -69,4 +72,19 @@ export const logOut = () => (dispatch) =>{
     localStorage.removeItem('cartItems')
     localStorage.removeItem('shippingAddress')
     dispatch({type : USER_LOGOUT})
+}
+
+// USER PROFILE_SCREEN
+export const userProfileAction = () => (dispatch, getState) => {
+    dispatch({type : USER_PROFILE_REQUEST})
+    const {signIn : {userInfo}} = getState()
+    Axios.get(`/api/users/${userInfo ? userInfo._id : ''}`, {
+        headers: {
+            authorization : `Baerer ${userInfo ? userInfo.token : ''}`
+        }
+    }).then(response => {
+        dispatch({type : USER_PROFILE_SUCCESS, payload : response.data})
+    }).catch(error => {
+        dispatch({type : USER_PROFILE_FAIL, payload : error.response && error.response.data.message ? error.response.data.message : error.message})
+    })
 }

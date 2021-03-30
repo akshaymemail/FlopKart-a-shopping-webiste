@@ -124,7 +124,7 @@ export const orderHistoryAction = () => async (dispatch, getState) => {
     } = getState()
     Axios.get('/api/orders/mine/history', {
         headers: {
-            authorization: `Baerer ${userInfo.token}`
+            authorization: `Baerer ${userInfo ? userInfo.token : 'sb'}`
         }
     }).then(response => {
         dispatch({

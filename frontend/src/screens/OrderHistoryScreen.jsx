@@ -5,6 +5,11 @@ import MessageBox from '../components/MessageBox'
 import { orderHistoryAction } from '../redux/order/orderActions'
 
 function OrderHistoryScreen(props) {
+    // redirect user if not signed in 
+    const {userInfo} = useSelector(state => state.signIn)
+    if(!userInfo){
+        props.history.push(`/signin?redirect=${props.location.pathname}`)
+    }
     const dispatch = useDispatch()
     // order history
     const  {loading, error,success, order} = useSelector(state => state.orderHistory)

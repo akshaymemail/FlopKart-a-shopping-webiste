@@ -3,7 +3,7 @@ import data from '../data.js'
 import User from '../models/userModel.js'
 import bcrypt from 'bcrypt'
 import {
-    generateToken
+    generateToken, isAuth
 } from '../utils/config.js'
 
 const userRouter = express.Router()
@@ -79,6 +79,19 @@ userRouter.post('/register', (req, res) => {
             })
         } else {
             res.status(401).send({message : err.message})
+        }
+    })
+})
+
+// USER PROFILE
+userRouter.get('/:id', isAuth, (req, res) => {
+    User.findById(req.params.id, (err, foundUser) => {
+        if(!err){
+            // user found
+            res.send(foundUser)
+        } else {
+            // no user found
+            res.status(404).send({message : 'User Not Found'})
         }
     })
 })
