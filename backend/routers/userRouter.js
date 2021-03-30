@@ -95,4 +95,43 @@ userRouter.get('/:id', isAuth, (req, res) => {
         }
     })
 })
+
+// UPDATE USER PROFILE
+userRouter.put('/profile', isAuth, (req, res) => {
+    User.findById(req.user._id, (err, foundUser) => {
+        if(!err){
+            // there is no any error, now check for user
+            if(foundUser){
+                // user was found, now update the information
+                foundUser.firstName = req.body.firstName || foundUser.firstName
+                foundUser.lastName = req.body.lastName || foundUser.lastName
+                foundUser.email = req.body.email || foundUser.email
+                if(req.body.password){
+                    foundUser.password = bcrypt.hashSync(req.body.password, 8)
+                }
+                foundUser.save((err, updatedUser) => {
+                    if(!err){
+                        res.send({
+                            _id : updatedUser._id,
+                            firstName : updatedUser.firstName,
+                            lastName : updatedUser.lastName,
+                            email : updatedUser.email,
+                            isAdmin : updatedUser.isAdmin,
+                            token : generateToken(updatedUser)
+                        })
+                    }else {
+                        res.status(503).send({message : err.message})
+                    }
+                })
+            } else {
+                // user was not found, so send 404 status
+                res.status(404).send({message : "User Not Found"})
+            }
+        } else{
+            // there was an error
+            res.status(503).send({message : err.message})
+        }
+    })
+})
+
 export default userRouter

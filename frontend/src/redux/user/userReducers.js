@@ -1,4 +1,4 @@
-import { USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS } from "./userTypes"
+import { UPDATE_PROFILE_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_RESET, UPDATE_PROFILE_SUCCESS, USER_LOGOUT, USER_PROFILE_FAIL, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS } from "./userTypes"
 
 const initialState = {
     loading: false,
@@ -51,9 +51,29 @@ export const userProfileReducer = (state = {user:{}, loading : true, error: ''},
         }
         case USER_PROFILE_SUCCESS : return {
             loading : false,
-            user : action.payload
+            user : action.payload,
+            success : true
         }
         case USER_PROFILE_FAIL : return {
+            loading : false,
+            error : action.payload
+        }
+        default : return state
+    }
+}
+
+// UPDATE PROFILE 
+export const updateProfileReducer = (state = initialState, action) => {
+    switch(action.type){
+        case UPDATE_PROFILE_REQUEST : return {
+            loading : true
+        }
+        case UPDATE_PROFILE_SUCCESS : return {
+            loading : false,
+            success : true,
+            userInfo : action.payload
+        }
+        case UPDATE_PROFILE_FAIL : return {
             loading : false,
             error : action.payload
         }

@@ -1,5 +1,8 @@
 import Axios from 'axios'
 import {
+    UPDATE_PROFILE_FAIL,
+    UPDATE_PROFILE_REQUEST,
+    UPDATE_PROFILE_SUCCESS,
     USER_LOGOUT,
     USER_PROFILE_FAIL,
     USER_PROFILE_REQUEST,
@@ -74,7 +77,7 @@ export const logOut = () => (dispatch) =>{
     dispatch({type : USER_LOGOUT})
 }
 
-// USER PROFILE_SCREEN
+// USER PROFILE
 export const userProfileAction = () => (dispatch, getState) => {
     dispatch({type : USER_PROFILE_REQUEST})
     const {signIn : {userInfo}} = getState()
@@ -86,5 +89,22 @@ export const userProfileAction = () => (dispatch, getState) => {
         dispatch({type : USER_PROFILE_SUCCESS, payload : response.data})
     }).catch(error => {
         dispatch({type : USER_PROFILE_FAIL, payload : error.response && error.response.data.message ? error.response.data.message : error.message})
+    })
+}
+
+// UPDATE USER PROFILE 
+export const updateProfileAction = (user) => (dispatch, getState) => {
+    dispatch({type : UPDATE_PROFILE_REQUEST, payload : user})
+    const {signIn : {userInfo}} = getState()
+    Axios.put('api/users/profile', user, {
+        headers: {
+            authorization : `Baerer ${userInfo ? userInfo.token : ''}`
+        }
+    }).then(response => {
+        dispatch({type : UPDATE_PROFILE_SUCCESS, payload : response.data})
+        dispatch({type : USER_SIGNIN_SUCCESS , payload : response.data})
+        localStorage.setItem('userInfo', JSON.stringify(response.data))
+    }).catch(error => {
+        dispatch({type : UPDATE_PROFILE_FAIL, payload : error.response && error.response.data.message ? error.response.data.message : error.message})
     })
 }
