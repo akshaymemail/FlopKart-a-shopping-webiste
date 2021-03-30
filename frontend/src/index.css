@@ -179,6 +179,9 @@ footer {
 .min-30 {
   max-width: 30rem;
 }
+button.small{
+  width: fit-content;
+}
 
 /* imgage */
 
@@ -338,8 +341,41 @@ i.button-loading{
   display: none;
 }
 
+/* TABLES */
+.table{
+ min-width: 900px;
+ display: table;
+ border-collapse: collapse;
+ margin: auto;
+}
+
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f4f4f4
+}
+
+.table th,
+.table td {
+  text-align: left;
+  border: .1rem solid #e4e4e4;
+  padding: .5rem;
+}
+.responsive{
+  max-width: 100%;
+  overflow-x: auto;
+  margin: auto;
+}
+
+/* MEDIA QUERIES */
+@media(max-width : 768px){
+  .responsive{
+    max-width: 360px;
+  }
+}
+
+
 ::-webkit-scrollbar {
   width: 3px;
+  height : 3px;
 }
 
 ::-webkit-scrollbar-track {

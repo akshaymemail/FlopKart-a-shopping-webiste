@@ -16,6 +16,7 @@ function Logout(props) {
             <Link onClick={handleProfile} to="#">{props.firstName} <i className='fa fa-caret-down'> </i> </Link>
             <div id="profile-card"> 
                 <Link onClick={handleSignOut}>Logout</Link>
+                <Link to='/orderhistory'>Order History</Link>
             </div>
         </>
     )

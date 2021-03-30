@@ -81,4 +81,16 @@ orderRouter.put('/:id/pay', isAuth, (req, res) => {
     })
 })
 
+// ORDER HISTORY
+orderRouter.get('/mine/history', isAuth, (req, res) => {
+    Order.find({user : req.user._id}, (err, foundOrders) => {
+        if(!err){
+            res.send(foundOrders)
+        } else {
+            res.status(404).send({message : "Orders Not Found"})
+            console.log(err)
+        }
+    })
+})
+
 export default orderRouter

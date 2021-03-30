@@ -1,4 +1,4 @@
-import { CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_RESET, CREATE_ORDER_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS} from "./orderTypes"
+import { CREATE_ORDER_FAIL, CREATE_ORDER_REQUEST, CREATE_ORDER_RESET, CREATE_ORDER_SUCCESS, ORDER_DETAILS_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_HISTORY_FAIL, ORDER_HISTORY_REQUEST, ORDER_HISTORY_SUCCESS, ORDER_PAY_FAIL, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS} from "./orderTypes"
 
 const initialState = {
     loading : false,
@@ -55,6 +55,25 @@ export const orderPayReducer = (state = initialState, action) => {
             success : true
         }
         case ORDER_PAY_FAIL : return {
+            loading : false,
+            error : action.payload
+        }
+        default : return state
+    }
+}
+
+// ORDER HISTORY ACTION 
+export const orderHistoryReducer = (state = initialState, action) => {
+    switch(action.type){
+        case ORDER_HISTORY_REQUEST : return {
+            loading : true
+        }
+        case ORDER_HISTORY_SUCCESS : return {
+            loading : false,
+            order : action.payload,
+            success : true
+        }
+        case ORDER_HISTORY_FAIL : return {
             loading : false,
             error : action.payload
         }
