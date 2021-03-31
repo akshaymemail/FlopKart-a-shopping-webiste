@@ -17,7 +17,7 @@ app.use(express.urlencoded({extended : true}))
 const PORT = 5000 || process.env.PORT
 
 // connecting to the mongodb
-mongoose.connect(process.env.DB_STRING,{
+mongoose.connect(process.env.MONGODB_URI||process.env.DB_STRING,{
     useNewUrlParser : true,
     useUnifiedTopology : true,
     useCreateIndex : true
@@ -35,6 +35,11 @@ app.get('/', (req, res) =>{
 app.get('/api/payment/method/paypal',isAuth, (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID)
 })
+
+// check if app is on production
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('frontend/build'))
+}
 
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`)
