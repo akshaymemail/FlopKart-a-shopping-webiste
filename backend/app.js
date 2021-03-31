@@ -29,7 +29,7 @@ app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 
 app.get('/', (req, res) =>{
-    res.sendFile(path.join(__dirname,"/frontend/build", "index.html"))
+    res.send("Node is here!")
 })
 
 app.get('/api/payment/method/paypal',isAuth, (req, res) => {
@@ -39,6 +39,9 @@ app.get('/api/payment/method/paypal',isAuth, (req, res) => {
 // check if app is on production
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('frontend/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname,"../frontend/build", "index.html"))
+    })
 }
 
 app.listen(PORT, () => {
