@@ -29,7 +29,7 @@ app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 
 app.get('/', (req, res) =>{
-    res.send("Node is here!")
+    res.sendFile(path.join(__dirname,"/frontend/build", "index.html"))
 })
 
 app.get('/api/payment/method/paypal',isAuth, (req, res) => {
