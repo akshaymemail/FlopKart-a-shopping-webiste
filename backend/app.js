@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended : true}))
 
 // constants
-const PORT = 5000 || process.env.PORT
+const PORT = process.env.PORT || 5000
 
 // connecting to the mongodb
 mongoose.connect(process.env.MONGODB_URI||process.env.DB_STRING,{
