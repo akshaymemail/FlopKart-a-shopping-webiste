@@ -9,7 +9,7 @@
     "build" : "cd frontend && npm run build",
     "install-client" : "cd frontend && npm install",
     "heroku-postbuild" : "npm run install-client && npm run build",
-    "start": "node app.js"
+    "start": "node backend/app.js"
   },
   "repository": {
     "type": "git",
